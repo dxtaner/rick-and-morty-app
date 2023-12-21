@@ -1,6 +1,8 @@
 Rick and Morty Character Search App
 ====================
 
+https://rick-and-morty-app-puce.vercel.app/
+
 Features
 --------
 
@@ -22,7 +24,7 @@ How to Run the App
 ------------------
 
 1.  Clone the repository:
-`git clone https://github.com/yourusername/character-search-app.git`3.  Navigate to the project directory:
+`git clone https://github.com/dxtaner/https://github.com/dxtaner/rick-and-morty-app  Navigate to the project directory:
 `cd character-search-app`5.  Install dependencies:
 `npm install`7.  Start the development server:
 `npm start`9.  Open your browser and go to [http://localhost:3000](http://localhost:3000) to view the app.
