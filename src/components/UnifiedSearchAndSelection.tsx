@@ -1,14 +1,8 @@
 import React from "react";
 import SearchBox from "./SearchBox";
 import SelectedCharacters from "./SelectedCharacters";
-import { Character } from "../utils/Character";
 import "./UnifiedSearchAndSelection.css";
-
-interface UnifiedSearchAndSelectionProps {
-  onSearch: (query: string) => void;
-  selectedCharacters: Character[];
-  onDeselect: (character: Character) => void;
-}
+import { UnifiedSearchAndSelectionProps } from "../utils/UnifiedSearchAndSelectionProps";
 
 const UnifiedSearchAndSelection: React.FC<UnifiedSearchAndSelectionProps> = ({
   onSearch,
