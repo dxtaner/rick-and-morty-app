@@ -1,9 +1,6 @@
 import React, { useState, ChangeEvent, FormEvent, useRef } from "react";
 import "./SearchBox.css";
-
-interface SearchBoxProps {
-  onSearch: (query: string) => void;
-}
+import { SearchBoxProps } from "../utils/SearchBoxProps";
 
 const SearchBox: React.FC<SearchBoxProps> = ({ onSearch }) => {
   const [inputValue, setInputValue] = useState<string>("");
