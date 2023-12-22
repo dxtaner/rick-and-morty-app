@@ -1,11 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import { Character } from "../utils/Character";
+import { SelectedCharactersProps } from "../utils/SelectedCharactersProps";
 import "./SelectedCharacters.css";
-
-interface SelectedCharactersProps {
-  characters: Character[];
-  onRemove: (character: Character) => void;
-}
 
 const SelectedCharacters: React.FC<SelectedCharactersProps> = ({
   characters,
