@@ -1,5 +1,5 @@
 import React from "react";
-import { Character } from "./Character";
+import { Character } from "../utils/Character";
 import "./SelectedCharacters.css";
 
 interface SelectedCharactersProps {
@@ -11,6 +11,10 @@ const SelectedCharacters: React.FC<SelectedCharactersProps> = ({
   characters,
   onRemove,
 }) => {
+  if (characters.length === 0) {
+    return null;
+  }
+
   return (
     <div className="selected-characters">
       {characters.map((character) => (
