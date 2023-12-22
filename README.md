@@ -1,7 +1,7 @@
 Rick and Morty Character Search App
 ====================
 
-https://rick-and-morty-app-puce.vercel.app/
+[https://rick-and-morty-app-puce.vercel.app/](https://rick-and-morty-app-dxtaner.vercel.app/)
 
 Features
 --------
