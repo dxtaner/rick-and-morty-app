@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import "./ResultList.css";
+import React, { useRef, useEffect, useState } from "react";
 import { Character } from "../utils/Character";
+import "./ResultList.css";
 
 interface ResultListProps {
   results: Character[];
@@ -34,17 +34,20 @@ const ResultList: React.FC<ResultListProps> = ({
   setSelectedCharacters,
   multiSelect = false,
 }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   useEffect(() => {
-    setActiveIndex(null);
-  }, [results]);
+    if (containerRef.current) {
+      containerRef.current.focus();
+    }
+  }, []);
 
   const isSelected = (character: Character) => {
     return selectedCharacters.some((char) => char.id === character.id);
   };
 
-  const handleCardClick = (character: Character) => {
+  const handleCardClick = (character: Character, index: number) => {
     if (multiSelect) {
       isSelected(character)
         ? setSelectedCharacters((prev) =>
@@ -54,17 +57,66 @@ const ResultList: React.FC<ResultListProps> = ({
     } else {
       isSelected(character) ? onDeselect(character) : onSelect(character);
     }
+    setActiveIndex(index);
+  };
+
+  const handleKeyDown = (
+    event: React.KeyboardEvent<HTMLDivElement>,
+    character: Character,
+    index: number
+  ) => {
+    if (
+      event.key === "ArrowUp" ||
+      event.key === "ArrowDown" ||
+      event.key === "ArrowLeft" ||
+      event.key === "ArrowRight"
+    ) {
+      event.preventDefault();
+      if (containerRef.current) {
+        const children = Array.from(
+          containerRef.current.children
+        ) as HTMLDivElement[];
+        const currentIndex = children.findIndex((child) =>
+          child.contains(document.activeElement)
+        );
+
+        if (currentIndex !== -1) {
+          switch (event.key) {
+            case "ArrowUp":
+            case "ArrowLeft":
+              if (currentIndex > 0) {
+                children[currentIndex - 1].focus();
+                setActiveIndex(currentIndex - 1);
+              }
+              break;
+            case "ArrowDown":
+            case "ArrowRight":
+              if (currentIndex < children.length - 1) {
+                children[currentIndex + 1].focus();
+                setActiveIndex(currentIndex + 1);
+              }
+              break;
+            default:
+              break;
+          }
+        }
+      }
+    } else if (event.key === "Enter") {
+      handleCardClick(character, index);
+    }
   };
 
   return (
-    <ul className="result-container">
+    <div className="result-container" ref={containerRef} tabIndex={0}>
       {results.map((character, index) => (
-        <li
+        <div
           key={character.id}
           className={`result-card ${isSelected(character) ? "selected" : ""} ${
             activeIndex === index ? "active" : ""
           }`}
-          onClick={() => handleCardClick(character)}>
+          onClick={() => handleCardClick(character, index)}
+          onKeyDown={(e) => handleKeyDown(e, character, index)}
+          tabIndex={0}>
           <img
             src={character.image}
             alt={character.name}
@@ -76,9 +128,9 @@ const ResultList: React.FC<ResultListProps> = ({
           <div className="episode-info">
             Episodes: {character.episode.length}
           </div>
-        </li>
+        </div>
       ))}
-    </ul>
+    </div>
   );
 };
 
