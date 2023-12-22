@@ -1,16 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import { Character } from "../utils/Character";
+import { ResultListProps } from "../utils/ResultListProps";
 import "./ResultList.css";
-
-interface ResultListProps {
-  results: Character[];
-  onSelect: (character: Character) => void;
-  onDeselect: (character: Character) => void;
-  query: string;
-  selectedCharacters: Character[];
-  setSelectedCharacters: React.Dispatch<React.SetStateAction<Character[]>>;
-  multiSelect?: boolean;
-}
 
 const highlightQuery = (text: string, query: string): JSX.Element => {
   const regex = new RegExp(`(${query})`, "gi");
