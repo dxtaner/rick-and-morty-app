@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./ResultList.css";
-import { Character } from "./Character";
+import { Character } from "../utils/Character";
 
 interface ResultListProps {
   results: Character[];
